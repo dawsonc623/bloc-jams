@@ -1,0 +1,77 @@
+body {
+    font-family: 'Open Sans';
+    color: white;
+    min-height: 100%;
+}
+
+body.landing {
+    background-color: rgb(58,23,63);
+}
+
+html {
+    height: 100%;
+    font-size: 100%;
+}
+
+.hero-content {
+    position: relative;
+    min-height: 600px;
+    background-image: url(../assets/images/bloc_jams_bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+
+.hero-content .hero-title {
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: 0.5rem;
+    position: absolute;
+        top: 40%;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 0px rgb(58,23,63);
+    -webkit-transform: translateY(-50);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    width: 100%;
+}
+
+.ion-iphone,
+.ion-music-note,
+.ion-radio-waves {
+    color: rgb(233,50,117);
+    font-size: 5rem;
+}
+
+.navbar {
+    padding: 0.5rem;
+    background-color: rgb(101,18,95);
+}
+
+.navbar .logo {
+    position: relative;
+    left: 2rem;
+}
+
+.point {
+    display: table-cell;
+    padding: 2rem;
+    position: relative;
+    text-align: center;
+    width: 33.3%
+}
+
+.point .point-title {
+    font-size: 1.25rem;
+}
+
+.selling-points {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: table;
+    position: relative;
+    width: 100%;
+}
