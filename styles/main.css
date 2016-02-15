@@ -25,6 +25,10 @@ body {
     max-width: 64rem;
 }
 
+.container.narrow {
+    max-width: 56rem;
+}
+
 html {
     font-size: 100%;
     height: 100%;

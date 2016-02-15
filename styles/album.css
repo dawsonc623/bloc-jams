@@ -1,0 +1,78 @@
+body.album {
+    background-attachment: fixed;
+    background-image: url(../assets/images/blurred_backgrounds/blur_bg_3.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.album-cover-art {
+    left: 20%;
+    margin-top: 1rem;
+    position: relative;
+    width: 60%;
+}
+
+.album-view-details {
+    padding: 1rem;
+    position: relative;
+    top: 1.5rem;
+}
+
+.album-view-details .album-view-artist {
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.album-view-details .album-view-release-info {
+    font-size: 0.75rem;
+    font-weight: 300;
+}
+
+.album-view-details .album-view-title {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.album-view-song-item {
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    height: 3rem;
+}
+
+.album-view-song-list {
+    font-size: 0.75rem;
+    font-weight: 300;
+    margin: 1.5rem auto;
+    width: 90%;
+}
+
+.song-item-duration {
+    width: 5%;
+}
+
+.song-item-number {
+    width: 5%;
+}
+
+.song-time-title {
+    width: 85%;
+}
+
+@media (max-width: 40rem) and (min-width: 20rem) {
+    .album-view-details {
+        text-align: center;
+    }
+    
+    .album-view-title {
+        margin-top: 0;
+    }
+}
+
+@media (max-width: 64rem) and (min-width: 20rem) {
+    .album-view-song-list {
+        margin: auto;
+        position: relative;
+        top: 1rem;
+        width: 80%;
+    }
+}
