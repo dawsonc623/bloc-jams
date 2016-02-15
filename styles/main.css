@@ -5,8 +5,8 @@
 }
 
 body {
-    font-family: 'Open Sans';
     color: white;
+    font-family: 'Open Sans';
     min-height: 100%;
 }
 
@@ -26,18 +26,56 @@ body {
 }
 
 html {
-    height: 100%;
     font-size: 100%;
+    height: 100%;
 }
 
 .navbar {
+    background-color: rgba(101,18,95,0.5);
     padding: 0.5rem;
-    background-color: rgb(101,18,95);
+    position: relative;
+    z-index: 1;
+}
+
+.navbar .links-container {
+    color: white;
+    display: table;
+    height: 100px;
+    position: absolute;
+    right: 0;
+    text-decoration: none;
+    top: 0;
+}
+
+.links-container .navbar-link {
+    color: white;
+    cursor: pointer;
+    display: table-cell;
+    font-size: 0.625rem;
+    font-weight: 700;
+    height: 100%;
+    letter-spacing: 0.05rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: middle;
+}
+
+.links-container .navbar-link:hover {
+    color: rgb(233,50,117);
+}
+
+.links-container .navbar-link:active {
+    background-color: white;
+    color: rgb(233,50,117);
 }
 
 .navbar .logo {
-    position: relative;
+    cursor: pointer;
     left: 2rem;
+    position: relative;
 }
 
 @media (min-width: 640px) {
