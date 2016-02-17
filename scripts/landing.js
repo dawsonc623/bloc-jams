@@ -21,13 +21,9 @@ function animatePoints(points) {
 window.onload = function () {
     "use strict";
     
-    var i,
-        points = document.getElementsByClassName("point"),
+    var points = document.getElementsByClassName("point"),
         pointsContainer = document.querySelector(".selling-points"),
-        scrollThreshold,
-        windowInnerHeight = window.innerHeight;
-    
-    scrollThreshold = pointsContainer.getBoundingClientRect().top - windowInnerHeight + 200;
+        scrollThreshold = pointsContainer.getBoundingClientRect().top - window.innerHeight + 200;
     
     // In case the points are within visible range already
     if (document.documentElement.scrollTop || document.body.scrollTop >= scrollThreshold) {
