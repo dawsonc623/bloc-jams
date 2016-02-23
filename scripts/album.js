@@ -69,11 +69,54 @@ var albumPicasso = {
     };
 
 function createSongRow(songNumber, songTitle, songDuration) {
-    return $('<tr class="album-view-song-item">' +
-             '   <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>' +
-             '   <td class="song-item-title">' + songTitle + '</td>' +
-             '   <td class="song-item-duration">' + songDuration + '</td>' +
-             '</tr>');
+    var $songRow =
+            $('<tr class="album-view-song-item">' +
+              '   <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>' +
+              '   <td class="song-item-title">' + songTitle + '</td>' +
+              '   <td class="song-item-duration">' + songDuration + '</td>' +
+              '</tr>');
+    
+    $songRow.find(".song-item-number").click(function() {
+        var $this = $(this),
+            songItemNumber = $this.attr("data-song-number");
+        
+        // No song is playing. Just play this one
+        if (currentlyPlayingSong === null) {
+            $this.html(pauseButtonTemplate);
+            currentlyPlayingSong = songItemNumber;
+        }
+        // This song is playing. Pause it
+        else if (currentlyPlayingSong === songItemNumber) {
+            $this.html(playButtonTemplate);
+            currentlyPlayingSong = null;
+        }
+        // A different song is playing. Stop it and play this one
+        else if (currentlyPlayingSong !== songItemNumber) {
+            $("[data-song-number='" + currentlyPlayingSong + "']").html(currentlyPlayingSong);
+            
+            $this.html(pauseButtonTemplate);
+            currentlyPlayingSong = songItemNumber;
+        }
+    });
+    
+    $songRow.hover(function() {
+        var $songItem = $(this).find(".song-item-number"),
+            songItemNumber = $songItem.attr("data-song-number");
+
+        if (songItemNumber !== currentlyPlayingSong) {
+            $songItem.html(playButtonTemplate);
+        }
+    },
+    function() {
+        var $songItem = $(this).find(".song-item-number"),
+            songItemNumber = $songItem.attr("data-song-number");
+
+        if (songItemNumber !== currentlyPlayingSong) {
+            $songItem.html(songItemNumber);
+        }
+    });
+    
+    return $songRow;
 }
 
 function setCurrentAlbum(album) {
@@ -100,99 +143,12 @@ function setCurrentAlbum(album) {
     }
 }
 
-function hasClass(element, className) {
-    return element.className.indexOf(className) !== -1;
-}
-
-function findParentByClassName(element, parentClassName) {
-    var parent = element;
-    
-    do {
-        parent = parent.parentNode;
-    }
-    while (parent && !hasClass(parent, parentClassName));
-    
-    return parent === element ? null : parent;
-}
-
-function getSongItem(element) {
-    var songItemNumber;
-    
-    if (hasClass(element, "song-item-number")) {
-        songItemNumber = element;
-    }
-    else if (hasClass(element, "album-song-button") || hasClass(element, "ion-play") || hasClass(element, "ion-pause")) {
-        songItemNumber = findParentByClassName(element, "song-item-number");
-    }
-    else if (hasClass(element, "album-view-song-item")) {
-        songItemNumber = element.querySelector(".song-item-number");
-    }
-    else if (hasClass(element, "song-item-title") || hasClass("song-item-duration")) {
-        songItemNumber = findParentByClassName(element, "album-view-song-item").querySelector(".song-item-number");
-    }
-    
-    return songItemNumber;
-}
-
-function clickHandler(targetElement) {
-    var songItem = getSongItem(targetElement);
-    
-    // No song is playing. Just play this one
-    if (currentlyPlayingSong === null) {
-        songItem.innerHTML = pauseButtonTemplate;
-        currentlyPlayingSong = songItem.getAttribute("data-song-number");
-    }
-    // This song is playing. Pause it
-    else if (currentlyPlayingSong === songItem.getAttribute("data-song-number")) {
-        songItem.innerHTML = playButtonTemplate;
-        currentlyPlayingSong = null;
-    }
-    // A different song is playing. Stop it and play this one
-    else if (currentlyPlayingSong !== songItem.getAttribute("data-song-number")) {
-        var currentlyPlaysingSongItem = document.querySelector("[data-song-number='" + currentlyPlayingSong + "']");
-        currentlyPlaysingSongItem.innerHTML = currentlyPlaysingSongItem.getAttribute("data-song-number");
-        songItem.innerHTML = pauseButtonTemplate;
-        currentlyPlayingSong = songItem.getAttribute("data-song-number");
-    }
-}
-
 var currentlyPlayingSong = null,
-    songListContainer = document.querySelector(".album-view-song-list"),
     playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>',
     pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 
 window.onload = function() {
     "use strict";
     
-    var songRows = document.getElementsByClassName("album-view-song-item");
-    
     setCurrentAlbum(albumPicasso);
-    
-    songListContainer.addEventListener("mouseover", function(event) {
-        if (event.target.parentElement.className === "album-view-song-item") {
-            var songItem = getSongItem(event.target),
-            songItemNumber = songItem.getAttribute("data-song-number");
-
-            if (songItemNumber !== currentlyPlayingSong) {
-                songItem.innerHTML = playButtonTemplate;
-            }
-        }
-    });
-
-    for (let i = 0; i < songRows.length; i++) {
-        let songRow = songRows[i];
-
-        songRow.addEventListener("mouseleave", function(event) {
-            var songItem = getSongItem(event.target),
-                songItemNumber = songItem.getAttribute("data-song-number");
-
-            if (songItemNumber !== currentlyPlayingSong) {
-                songItem.innerHTML = songItemNumber;
-            }
-        });
-
-        songRow.addEventListener("click", function(event) {
-            clickHandler(event.target);
-        });
-    }
 };
